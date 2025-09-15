@@ -1,0 +1,33 @@
+name: search
+description: "A new Flutter package project."
+version: 0.0.1
+publish_to: none
+homepage: null
+
+environment:
+  sdk: ^3.9.2
+  flutter: ">=3.19.0"
+
+dependencies:
+  core:
+    path: ../core
+  dartz: ^0.10.1
+  firebase_crashlytics: ^5.0.1
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  provider: ^6.1.5+1
+  rxdart: ^0.28.0
+
+dev_dependencies:
+  bloc_test: ^10.0.0
+  build_runner: ^2.4.6
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.4.4
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+# The following section is specific to Flutter packages.
+flutter: null

@@ -1,0 +1,25 @@
+{
+  "adult": false,
+  "backdrop_path": "/backdrop_path.jpg",
+  "first_air_date": "2008-01-20",
+  "genres": [
+    {
+      "id": 1,
+      "name": "Genre 1"
+    },
+    {
+      "id": 2,
+      "name": "Genre 2"
+    }
+  ],
+  "id": 1,
+  "name": "Name",
+  "number_of_episodes": 62,
+  "number_of_seasons": 5,
+  "original_name": "Original Name",
+  "overview": "Overview",
+  "popularity": 1.0,
+  "poster_path": "/post_path.jpg",
+  "vote_average": 1.0,
+  "vote_count": 1
+}

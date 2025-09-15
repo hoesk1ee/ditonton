@@ -1,0 +1,8 @@
+include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    use_key_in_widget_constructors: ignore
+    constant_identifier_names: ignore
+    use_super_parameters: ignore
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
