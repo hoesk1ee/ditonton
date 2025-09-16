@@ -1,12 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
-import 'package:core/domain/entities/tv_series.dart';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search/presentation/bloc/tv_series/tv_series_search_bloc.dart';
 import 'package:search/search.dart';
+import 'package:tv_series/tv_series.dart';
 
 import 'tv_search_bloc_test.mocks.dart';
 

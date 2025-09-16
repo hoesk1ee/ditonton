@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/data/datasources/db/database_helper.dart';
-import 'package:movie/data/movie_local_data_source.dart';
+import 'package:movie/data/datasources/movie_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

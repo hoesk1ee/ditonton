@@ -1,21 +1,6 @@
 import 'package:core/core.dart';
 import 'package:about/about_page.dart';
 
-import 'package:core/presentation/pages/popular_tv_series_page.dart';
-
-import 'package:core/presentation/pages/top_rated_tv_series_page.dart';
-import 'package:core/presentation/pages/tv_series_detail_page.dart';
-import 'package:core/presentation/pages/tv_series_page.dart';
-
-import 'package:core/presentation/pages/watchlist_tv_series_page.dart';
-
-import 'package:core/presentation/provider/popular_tv_series_notifier.dart';
-
-import 'package:core/presentation/provider/top_rated_tv_series_notifier.dart';
-import 'package:core/presentation/provider/tv_series_detail_notifier.dart';
-import 'package:core/presentation/provider/tv_series_list_notifier.dart';
-
-import 'package:core/presentation/provider/watchlist_tv_series_notifier.dart';
 import 'package:ditonton/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +13,7 @@ import 'package:search/presentation/bloc/search/search_bloc.dart';
 import 'package:search/presentation/bloc/tv_series/tv_series_search_bloc.dart';
 import 'package:search/presentation/pages/search_tv_series_page.dart';
 import 'package:search/search.dart';
+import 'package:tv_series/tv_series.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,6 +62,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<PopularTvSeriesNotifier>(),
         ),
+
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
         ),

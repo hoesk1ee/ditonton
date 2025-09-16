@@ -1,7 +1,7 @@
 library movie;
 
-export 'data/movie_local_data_source.dart';
-export 'data/movie_remote_data_source.dart';
+export 'data/datasources/movie_local_data_source.dart';
+export 'data/datasources/movie_remote_data_source.dart';
 export 'data/models/movie_detail_model.dart';
 export 'data/models/movie_model.dart';
 export 'data/models/movie_response.dart';

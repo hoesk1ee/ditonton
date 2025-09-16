@@ -1,8 +1,8 @@
-import 'package:core/domain/entities/tv_series.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search/search.dart';
 import 'package:search/utils/debouce_event_transformer.dart';
+import 'package:tv_series/tv_series.dart';
 
 part 'tv_series_search_event.dart';
 part 'tv_series_search_state.dart';

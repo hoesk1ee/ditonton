@@ -1,8 +1,8 @@
-import 'package:core/data/models/tv_series_table.dart';
 import 'package:core/domain/entities/genre.dart';
+import 'package:tv_series/data/models/tv_series_table.dart';
 
-import 'package:core/domain/entities/tv_series.dart';
-import 'package:core/domain/entities/tv_series_detail.dart';
+import 'package:tv_series/domain/entities/tv_series.dart';
+import 'package:tv_series/domain/entities/tv_series_detail.dart';
 import 'package:movie/movie.dart';
 
 final testMovie = Movie(
