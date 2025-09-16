@@ -1,0 +1,40 @@
+workflows:
+  default-workflow:
+    name: Default Workflow
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      # Install dependencies untuk semua modul
+      - name: Get dependencies
+        script: |
+          flutter pub get
+          cd core && flutter pub get && cd ..
+          cd search && flutter pub get && cd ..
+          cd about && flutter pub get && cd ..
+
+      # Jalankan test untuk core
+      - name: Run tests in core module
+        script: |
+          cd core
+          flutter test
+          cd ..
+
+      # Jalankan test untuk search
+      - name: Run tests in search module
+        script: |
+          cd search
+          flutter test
+          cd ..
+
+      # Jalankan test untuk about
+      - name: Run tests in about module
+        script: |
+          cd about
+          flutter test
+          cd ..
+
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
