@@ -5,7 +5,6 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      # Install dependencies untuk semua modul
       - name: Get dependencies
         script: |
           flutter pub get
@@ -13,26 +12,27 @@ workflows:
           cd search && flutter pub get && cd ..
           cd about && flutter pub get && cd ..
 
-      # Jalankan test untuk core
       - name: Run tests in core module
         script: |
           cd core
           flutter test
           cd ..
 
-      # Jalankan test untuk search
       - name: Run tests in search module
         script: |
           cd search
           flutter test
           cd ..
 
-      # Jalankan test untuk about
       - name: Run tests in about module
         script: |
           cd about
           flutter test
           cd ..
+
+      - name: Build release APK
+        script: |
+          flutter build apk --release --obfuscate --split-debug-info=build/debug-info
 
     artifacts:
       - build/**/outputs/**/*.apk
