@@ -7,7 +7,16 @@ sealed class SearchState extends Equatable {
   List<Object> get props => [];
 }
 
-class SearchEmpty extends SearchState {}
+class SearchInitial extends SearchState {}
+
+class SearchEmpty extends SearchState {
+  final String message;
+
+  const SearchEmpty(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
 
 class SearchLoading extends SearchState {}
 

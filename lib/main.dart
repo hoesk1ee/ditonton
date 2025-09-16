@@ -27,7 +27,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
-import 'package:search/presentation/bloc/search_bloc.dart';
+import 'package:search/presentation/bloc/search/search_bloc.dart';
+import 'package:search/presentation/bloc/tv_series/tv_series_search_bloc.dart';
 import 'package:search/presentation/pages/search_tv_series_page.dart';
 import 'package:search/search.dart';
 
@@ -81,8 +82,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
         ),
+
+        // * bloc
         BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvSeriesSearchBloc>(),
         ),
       ],
       child: MaterialApp(

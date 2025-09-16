@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
 import 'package:core/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:search/search.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/presentation/bloc/tv_series/tv_series_search_bloc.dart';
 
 class SearchTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = "/search-tv-series";
@@ -24,11 +24,8 @@ class _SearchTvSeriesPageState extends State<SearchTvSeriesPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<TvSeriesSearchNotifier>(
-                  context,
-                  listen: false,
-                ).fetchTvSeriesSearch(query);
+              onChanged: (query) {
+                context.read<TvSeriesSearchBloc>().add(OnQueryChanged(query));
               },
               decoration: InputDecoration(
                 hintText: 'Search tv series name',
@@ -39,24 +36,34 @@ class _SearchTvSeriesPageState extends State<SearchTvSeriesPage> {
             ),
             SizedBox(height: 16),
             Text('Search Result', style: kHeading6),
-            Consumer<TvSeriesSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
+            BlocBuilder<TvSeriesSearchBloc, TvSeriesSearchState>(
+              builder: (context, state) {
+                if (state is TvSeriesSearchInitial) {
+                  return Expanded(
+                    child: Center(
+                      child: Text("Type in search box to find your TV Series!"),
+                    ),
+                  );
+                } else if (state is TvSeriesSearchLoading) {
                   return Center(child: CircularProgressIndicator());
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchResult;
+                } else if (state is TvSeriesSearchHasError) {
+                  return Expanded(child: Center(child: Text(state.message)));
+                } else if (state is TvSeriesSearchEmpty) {
+                  return Expanded(child: Center(child: Text(state.message)));
+                } else if (state is TvSeriesSearchHasData) {
+                  final result = state.result;
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final tvSerial = data.searchResult[index];
+                        final tvSerial = result[index];
                         return TvSeriesCardList(tvSerial);
                       },
                       itemCount: result.length,
                     ),
                   );
                 } else {
-                  return Expanded(child: Container());
+                  return Container();
                 }
               },
             ),
