@@ -23,6 +23,7 @@ dependencies:
   sqflite_sqlcipher: ^3.3.0
 
 dev_dependencies:
+  build_runner: ^2.8.0
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
