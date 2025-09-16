@@ -17,7 +17,10 @@ class TvSeriesLocalDataSourceImpl implements TvSeriesLocalDataSource {
   @override
   Future<String> insertWatchlist(TvSeriesTable tvSerial) async {
     try {
-      await databaseHelper.insertTvSeriesWatchList(tvSerial);
+      await databaseHelper.insert(
+        DatabaseHelper.tblTvSeriesWatchlist,
+        tvSerial.toJson(),
+      );
       return 'Added to Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
@@ -26,7 +29,10 @@ class TvSeriesLocalDataSourceImpl implements TvSeriesLocalDataSource {
 
   @override
   Future<TvSeriesTable?> getTvSeriesById(int id) async {
-    final result = await databaseHelper.getTvSerialById(id);
+    final result = await databaseHelper.getById(
+      DatabaseHelper.tblTvSeriesWatchlist,
+      id,
+    );
     if (result != null) {
       return TvSeriesTable.fromMap(result);
     } else {
@@ -36,14 +42,19 @@ class TvSeriesLocalDataSourceImpl implements TvSeriesLocalDataSource {
 
   @override
   Future<List<TvSeriesTable>> getWatchlistTvSeries() async {
-    final result = await databaseHelper.getWatchlistTvSeries();
+    final result = await databaseHelper.getAll(
+      DatabaseHelper.tblTvSeriesWatchlist,
+    );
     return result.map((data) => TvSeriesTable.fromMap(data)).toList();
   }
 
   @override
   Future<String> removeWatchlist(TvSeriesTable tvSerial) async {
     try {
-      await databaseHelper.removeTvSeriesWatchlist(tvSerial);
+      await databaseHelper.delete(
+        DatabaseHelper.tblTvSeriesWatchlist,
+        tvSerial.id,
+      );
       return 'Removed from Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());

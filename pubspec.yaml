@@ -26,6 +26,10 @@ dependencies:
   cached_network_image: ^3.4.1
   core:
     path: core
+  movie:
+    path: movie
+  tv_series:
+    path: tv_series
   dartz: ^0.10.1
   equatable: ^2.0.5
   firebase_core: ^4.1.0
