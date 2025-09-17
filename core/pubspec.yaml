@@ -1,6 +1,7 @@
 name: core
 description: "A new Flutter package project."
 version: 0.0.1
+publish_to: none
 homepage: null
 
 environment:
@@ -8,6 +9,10 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  movie:
+    path: ../movie
+  tv_series:
+    path: ../tv_series
   cached_network_image: ^3.4.1
   dartz: ^0.10.1
   encrypt: ^5.0.3

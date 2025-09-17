@@ -1,12 +1,9 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/movie_card_list.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:search/search.dart';
-
-import '../bloc/search_bloc.dart';
+import 'package:movie/presentation/widgets/movie_card_list.dart';
+import 'package:search/presentation/bloc/search/search_bloc.dart';
 
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
@@ -52,6 +49,16 @@ class SearchPage extends StatelessWidget {
                   );
                 } else if (state is SearchError) {
                   return Expanded(child: Center(child: Text(state.message)));
+                } else if (state is SearchEmpty) {
+                  return Expanded(child: Center(child: Text("No Movie found")));
+                } else if (state is SearchInitial) {
+                  return Expanded(
+                    child: Center(
+                      child: Text(
+                        "Start find your Movies by typing in the search box!",
+                      ),
+                    ),
+                  );
                 } else {
                   return Expanded(child: Container());
                 }

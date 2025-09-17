@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
-import 'package:core/domain/entities/movie.dart';
+
+import 'package:movie/domain/entities/movie.dart';
 import '../../domain/usecase/search_movies.dart';
 import 'package:flutter/foundation.dart';
 

@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:core/domain/entities/tv_series.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search/search.dart';
+import 'package:tv_series/tv_series.dart';
 
-import '../../../../core/test/helpers/test_helper.mocks.dart';
+import '../../helper/test_helper.mocks.dart';
 
 void main() {
   late SearchTvSeries usecase;
