@@ -97,8 +97,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 builder: (context, state) {
                   if (state is MovieListLoading) {
                     return Center(child: CircularProgressIndicator());
-                  } else if (state is MovieListEmpty) {
-                    return Center(child: Text(state.message));
                   } else if (state is MovieListHasError) {
                     return Center(child: Text(state.message));
                   } else if (state is MovieListHasData) {
@@ -118,8 +116,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 builder: (context, state) {
                   if (state is MovieListLoading) {
                     return Center(child: CircularProgressIndicator());
-                  } else if (state is MovieListEmpty) {
-                    return Center(child: Text(state.message));
                   } else if (state is MovieListHasError) {
                     return Center(child: Text(state.message));
                   } else if (state is MovieListHasData) {
@@ -138,8 +134,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 builder: (context, state) {
                   if (state is MovieListLoading) {
                     return Center(child: CircularProgressIndicator());
-                  } else if (state is MovieListEmpty) {
-                    return Center(child: Text(state.message));
                   } else if (state is MovieListHasError) {
                     return Center(child: Text(state.message));
                   } else if (state is MovieListHasData) {

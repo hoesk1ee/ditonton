@@ -11,15 +11,6 @@ final class MovieListInitial extends MovieListState {}
 
 final class MovieListLoading extends MovieListState {}
 
-final class MovieListEmpty extends MovieListState {
-  final String message;
-
-  MovieListEmpty(this.message);
-
-  @override
-  List<Object?> get props => [message];
-}
-
 final class MovieListHasError extends MovieListState {
   final String message;
 

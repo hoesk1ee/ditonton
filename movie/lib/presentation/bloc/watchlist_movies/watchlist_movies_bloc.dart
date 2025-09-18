@@ -13,6 +13,8 @@ class WatchlistMoviesBloc
   WatchlistMoviesBloc(this._getWatchlistMovies)
     : super(WatchlistMoviesInitial()) {
     on<FetchMovieWatchlist>((event, emit) async {
+      emit(WatchlistMoviesLoading());
+
       final result = await _getWatchlistMovies.execute();
 
       result.fold(
