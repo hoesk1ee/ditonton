@@ -4,6 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'package:movie/data/repositories/movie_repository_impl.dart';
 import 'package:movie/movie.dart';
+import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc.dart';
+import 'package:movie/presentation/bloc/movie_list/movie_list_bloc.dart';
+import 'package:movie/presentation/bloc/popular_movies/popular_movies_bloc.dart';
+import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
+import 'package:movie/presentation/bloc/watchlist_status/watchlist_status_bloc.dart';
 import 'package:search/presentation/bloc/search/search_bloc.dart';
 import 'package:search/presentation/bloc/tv_series/tv_series_search_bloc.dart';
 import 'package:search/search.dart';
@@ -13,11 +18,18 @@ final locator = GetIt.instance;
 
 void init() {
   // bloc
+  locator.registerFactory(() => SearchBloc(locator()));
+  locator.registerFactory(() => TvSeriesSearchBloc(locator()));
+  locator.registerFactory(() => MovieListBloc(locator()));
+  locator.registerFactory(() => PopularMoviesBloc(locator()));
+  locator.registerFactory(() => TopRatedMoviesBloc(locator()));
+  locator.registerFactory(() => MovieDetailBloc(locator(), locator()));
   locator.registerFactory(
-    () => SearchBloc(locator()),
-  );
-  locator.registerFactory(
-    () => TvSeriesSearchBloc(locator()),
+    () => WatchlistStatusBloc(
+      locator(),
+      locator(),
+      locator(),
+    ),
   );
   // provider
   locator.registerFactory(
