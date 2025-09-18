@@ -11,6 +11,7 @@ import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:movie/presentation/bloc/movie_list/movie_list_bloc.dart';
 import 'package:movie/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'package:movie/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
+import 'package:movie/presentation/bloc/watchlist_movies/watchlist_movies_bloc.dart';
 import 'package:movie/presentation/bloc/watchlist_status/watchlist_status_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<TopRatedMoviesBloc>()),
         BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistStatusBloc>()),
+        BlocProvider(create: (_) => di.locator<WatchlistMoviesBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
