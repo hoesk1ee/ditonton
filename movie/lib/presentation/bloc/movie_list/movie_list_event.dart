@@ -7,4 +7,4 @@ abstract class MovieListEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class FetchNowPlayingMovies extends MovieListEvent {}
+class FetchAllMovieLists extends MovieListEvent {}

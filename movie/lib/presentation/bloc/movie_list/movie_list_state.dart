@@ -30,10 +30,16 @@ final class MovieListHasError extends MovieListState {
 }
 
 final class MovieListHasData extends MovieListState {
-  final List<Movie> result;
+  final List<Movie> nowPlayingResult;
+  final List<Movie> popularResult;
+  final List<Movie> topRatedResult;
 
-  MovieListHasData(this.result);
+  MovieListHasData(
+    this.nowPlayingResult,
+    this.popularResult,
+    this.topRatedResult,
+  );
 
   @override
-  List<Object?> get props => [result];
+  List<Object?> get props => [nowPlayingResult, popularResult, topRatedResult];
 }

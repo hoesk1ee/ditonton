@@ -21,7 +21,11 @@ void init() {
   // bloc
   locator.registerFactory(() => SearchBloc(locator()));
   locator.registerFactory(() => TvSeriesSearchBloc(locator()));
-  locator.registerFactory(() => MovieListBloc(locator()));
+  locator.registerFactory(() => MovieListBloc(
+        locator(),
+        locator(),
+        locator(),
+      ));
   locator.registerFactory(() => PopularMoviesBloc(locator()));
   locator.registerFactory(() => TopRatedMoviesBloc(locator()));
   locator.registerFactory(() => MovieDetailBloc(locator(), locator()));
