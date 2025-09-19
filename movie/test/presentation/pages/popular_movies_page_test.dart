@@ -1,65 +1,75 @@
-// import 'package:core/core.dart';
-// import 'package:movie/movie.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mockito/annotations.dart';
-// import 'package:mockito/mockito.dart';
-// import 'package:provider/provider.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:movie/movie.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-// import 'popular_movies_page_test.mocks.dart';
+import 'package:movie/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 
-// @GenerateMocks([PopularMoviesNotifier])
-// void main() {
-//   late MockPopularMoviesNotifier mockNotifier;
+// * Create manual mock
+class MockPopularMoviesBloc extends Mock implements PopularMoviesBloc {}
 
-//   setUp(() {
-//     mockNotifier = MockPopularMoviesNotifier();
-//   });
+void main() {
+  late MockPopularMoviesBloc mockBloc;
 
-//   Widget _makeTestableWidget(Widget body) {
-//     return ChangeNotifierProvider<PopularMoviesNotifier>.value(
-//       value: mockNotifier,
-//       child: MaterialApp(home: body),
-//     );
-//   }
+  setUpAll(() {
+    // * Register fallback for mocktail.
+    registerFallbackValue(PopularMoviesInitial());
+  });
 
-//   testWidgets('Page should display center progress bar when loading', (
-//     WidgetTester tester,
-//   ) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Loading);
+  setUp(() {
+    mockBloc = MockPopularMoviesBloc();
 
-//     final progressBarFinder = find.byType(CircularProgressIndicator);
-//     final centerFinder = find.byType(Center);
+    // * Default stub for popular movies bloc
+    when(() => mockBloc.state).thenReturn(PopularMoviesLoading());
+    when(() => mockBloc.stream).thenAnswer(
+      (_) => Stream<PopularMoviesState>.fromIterable([PopularMoviesLoading()]),
+    );
+  });
 
-//     await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+  Widget _makeTestableWidget(Widget body) {
+    return BlocProvider<PopularMoviesBloc>.value(
+      value: mockBloc,
+      child: MaterialApp(home: body),
+    );
+  }
 
-//     expect(centerFinder, findsOneWidget);
-//     expect(progressBarFinder, findsOneWidget);
-//   });
+  testWidgets('Page should display center progress bar when loading', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
-//   testWidgets('Page should display ListView when data is loaded', (
-//     WidgetTester tester,
-//   ) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Loaded);
-//     when(mockNotifier.movies).thenReturn(<Movie>[]);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
 
-//     final listViewFinder = find.byType(ListView);
+  testWidgets(
+    'should display error message when popular movie state is Error',
+    (tester) async {
+      when(
+        () => mockBloc.state,
+      ).thenReturn(PopularMoviesHasError('Server Failure'));
+      whenListen(
+        mockBloc,
+        Stream.fromIterable([PopularMoviesHasError('Server Failure')]),
+      );
 
-//     await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+      final textFinder = find.byKey(Key('error_message'));
 
-//     expect(listViewFinder, findsOneWidget);
-//   });
+      await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+      expect(textFinder, findsOneWidget);
+    },
+  );
 
-//   testWidgets('Page should display text with message when Error', (
-//     WidgetTester tester,
-//   ) async {
-//     when(mockNotifier.state).thenReturn(RequestState.Error);
-//     when(mockNotifier.message).thenReturn('Error message');
+  testWidgets('Page should display ListView when data is loaded', (
+    WidgetTester tester,
+  ) async {
+    when(() => mockBloc.state).thenReturn(PopularMoviesHasData(<Movie>[]));
 
-//     final textFinder = find.byKey(Key('error_message'));
+    final listViewFinder = find.byType(ListView);
 
-//     await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
-//     expect(textFinder, findsOneWidget);
-//   });
-// }
+    expect(listViewFinder, findsOneWidget);
+  });
+}
