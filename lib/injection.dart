@@ -1,7 +1,9 @@
 import 'package:core/data/datasources/db/database_helper.dart';
+import 'package:core/utils/ssl_pinning.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:http/io_client.dart';
 import 'package:movie/data/repositories/movie_repository_impl.dart';
 import 'package:movie/movie.dart';
 import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc.dart';
@@ -23,7 +25,7 @@ import 'package:tv_series/tv_series.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   // bloc
   locator.registerFactory(() => SearchBloc(locator()));
   locator.registerFactory(() => TvSeriesSearchBloc(locator()));
@@ -112,5 +114,7 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  // locator.registerLazySingleton(() => http.Client());
+  final pinnedClient = IOClient(await SSLPinning.createHttpClient());
+  locator.registerLazySingleton<http.Client>(() => pinnedClient);
 }
