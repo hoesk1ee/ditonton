@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:about/about_page.dart';
 
 import 'package:ditonton/firebase_options.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseAnalytics.instance.logEvent(name: "app_opened");
   await di.init();
   runApp(MyApp());
 }

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 
 import 'package:core/utils/routes.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/bloc/tv_series_list/tv_series_list_bloc.dart';
@@ -20,6 +21,7 @@ class _TvSeriesPageState extends State<TvSeriesPage> {
   @override
   void initState() {
     super.initState();
+    FirebaseAnalytics.instance.logEvent(name: "tv_series_list_opened");
     Future.microtask(() {
       context.read<TvSeriesListBloc>().add(FetchAllTvSeriesList());
     });
