@@ -1,7 +1,6 @@
-import 'package:core/core.dart';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv_series/presentation/bloc/top_rated_tv_series/top_rated_tv_series_bloc.dart';
 import 'package:tv_series/tv_series.dart';
 
 class TopRatedTvSeriesPage extends StatefulWidget {
@@ -18,10 +17,7 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
   void initState() {
     super.initState();
     Future.microtask(
-      () => Provider.of<TopRatedTvSeriesNotifier>(
-        context,
-        listen: false,
-      ).fetchTopRatedTvSeries(),
+      () => context.read<TopRatedTvSeriesBloc>().add(FetchTopRatedTvSeries()),
     );
   }
 
@@ -31,23 +27,27 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
       appBar: AppBar(title: Text('Top Rated Movies')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedTvSeriesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+        child: BlocBuilder<TopRatedTvSeriesBloc, TopRatedTvSeriesState>(
+          builder: (context, state) {
+            if (state is TopRatedTvSeriesLoading) {
               return Center(child: CircularProgressIndicator());
-            } else if (data.state == RequestState.Loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final tvSerial = data.tvSeries[index];
-                  return TvSeriesCardList(tvSerial);
-                },
-                itemCount: data.tvSeries.length,
-              );
-            } else {
+            } else if (state is TopRatedTvSeriesHasError) {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(state.message),
               );
+            } else if (state is TopRatedTvSeriesEmpty) {
+              return Center(child: Text(state.message));
+            } else if (state is TopRatedTvSeriesHasData) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final tvSeries = state.result[index];
+                  return TvSeriesCardList(tvSeries);
+                },
+                itemCount: state.result.length,
+              );
+            } else {
+              return Container();
             }
           },
         ),

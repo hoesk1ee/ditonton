@@ -2,6 +2,13 @@ workflows:
   default-workflow:
     name: Default Workflow
     max_build_duration: 60
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "main"
+          include: true
+          source: true
     environment:
       flutter: stable
     scripts:
@@ -10,6 +17,8 @@ workflows:
           flutter pub get
           cd core && flutter pub get && cd ..
           cd search && flutter pub get && cd ..
+          cd movie && flutter pub get && cd ..
+          cd tv_series && flutter pub get && cd ..
           cd about && flutter pub get && cd ..
 
       - name: Run tests in core module
@@ -21,6 +30,18 @@ workflows:
       - name: Run tests in search module
         script: |
           cd search
+          flutter test
+          cd ..
+
+      - name: Run tests in tv series module
+        script: |
+          cd tv_series
+          flutter test
+          cd ..
+
+      - name: Run tests in movie module
+        script: |
+          cd movie
           flutter test
           cd ..
 

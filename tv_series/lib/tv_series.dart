@@ -31,10 +31,4 @@ export 'presentation/pages/tv_series_detail_page.dart';
 export 'presentation/pages/tv_series_page.dart';
 export 'presentation/pages/watchlist_tv_series_page.dart';
 
-export 'presentation/providers/popular_tv_series_notifier.dart';
-export 'presentation/providers/top_rated_tv_series_notifier.dart';
-export 'presentation/providers/tv_series_detail_notifier.dart';
-export 'presentation/providers/tv_series_list_notifier.dart';
-export 'presentation/providers/watchlist_tv_series_notifier.dart';
-
 export 'presentation/widgets/tv_series_card_list.dart';
