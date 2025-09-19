@@ -60,45 +60,6 @@ void init() {
     ),
   );
   locator.registerFactory(() => WatchlistTvSeriesBloc(locator()));
-  // provider
-
-  locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TvSeriesListNotifier(
-      getOnTheAirTvSeries: locator(),
-      getPopularTvSeries: locator(),
-      getTopRatedTvSeries: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TvSeriesDetailNotifier(
-      getTvSeriesDetail: locator(),
-      getTvSeriesRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveTvSeriesWatchlist: locator(),
-      removeTvSeriesWatchlist: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => WatchlistTvSeriesNotifier(
-      getWatchlistTvSeries: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => TvSeriesSearchNotifier(
-      searchTvSeries: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularTvSeriesNotifier(locator()),
-  );
-  locator.registerFactory(
-    () => TopRatedTvSeriesNotifier(getTopRatedTvSeries: locator()),
-  );
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
